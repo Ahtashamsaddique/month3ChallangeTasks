@@ -15,6 +15,7 @@ namespace WebApplication2.DBContext
         }
 
         public DbSet<RegisterUserDTO> Users { get; set; }
+        public DbSet<Products> Products { get; set; }
     }
 }
 

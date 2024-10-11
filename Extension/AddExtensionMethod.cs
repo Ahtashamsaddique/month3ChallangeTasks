@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
+using WebApplication2.Services;
 
 namespace WebApplication2.Extension
 {
@@ -21,6 +22,13 @@ namespace WebApplication2.Extension
                 }
                 return builder.ToString();
             }
+        }
+        public static void UseSqlTableDependency<T>(this IApplicationBuilder applicationBuilder, string connectionString)
+            where T : IProductChangeNotificationService
+        {
+            var serviceProvider = applicationBuilder.ApplicationServices;
+            var service = serviceProvider.GetService<T>();
+            service.SubscribeTableDependency(connectionString);
         }
     }
 }
